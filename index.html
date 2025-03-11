@@ -64,7 +64,7 @@
         </section>
 
         <!-- Modální okno pro produkt -->
-        <div id="product-modal" class="modal">
+        <div id="product-modal" class="modal" style="display: none;">
             <div class="modal-content">
                 <h2 id="modal-title">Přidat produkt</h2>
                 <form id="product-form">
@@ -90,7 +90,7 @@
         </div>
 
         <!-- Potvrzovací dialog -->
-        <div id="confirm-modal" class="modal">
+        <div id="confirm-modal" class="modal" style="display: none;">
             <div class="modal-content">
                 <h2>Potvrdit smazání</h2>
                 <p>Opravdu chcete smazat tento produkt?</p>
@@ -102,10 +102,11 @@
         </div>
     </main>
 
+    <!-- Načtení skriptů jako moduly (kvůli import/export) -->
     <script type="module" src="storage.js"></script>
     <script type="module" src="validation.js"></script>
-    <script src="inventory.js"></script>
+    <script type="module" src="inventory.js"></script>
     <script type="module" src="pdfExport.js"></script>
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>
