@@ -1,112 +1,127 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS Systém</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS Systém</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="container">
-            <a href="#" id="pos-link" class="active">Pokladna</a>
-            <a href="#" id="inventory-link">Sklad</a>
-            <a href="#" id="orders-link">Objednávky</a>
+  <nav class="main-nav">
+    <div class="container">
+      <a href="#" id="pos-link" class="active">Pokladna</a>
+      <a href="#" id="inventory-link">Sklad</a>
+      <a href="#" id="orders-link">Objednávky</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Sekce pokladny -->
+    <section id="pos-section" class="active-section">
+      <h1>Pokladna</h1>
+      <div class="grid">
+        <div class="products-list">
+          <div class="search-box">
+            <input type="text" id="product-search" placeholder="Vyhledat produkt...">
+          </div>
+          <div id="products-grid" class="grid"></div>
         </div>
-    </nav>
-
-    <main class="container">
-        <!-- Sekce pokladny -->
-        <section id="pos-section" class="active-section">
-            <h1>Pokladna</h1>
-            <div class="grid">
-                <div class="products-list">
-                    <div class="search-box">
-                        <input type="text" id="product-search" placeholder="Vyhledat produkt...">
-                    </div>
-                    <div id="products-grid" class="grid"></div>
-                </div>
-                <div class="cart">
-                    <h2>Nákupní košík</h2>
-                    <div id="cart-items"></div>
-                    <div class="cart-total">
-                        <span>Celkem:</span>
-                        <span id="cart-total">0 Kč</span>
-                    </div>
-                    <button id="checkout-btn" class="btn btn-primary">Dokončit objednávku</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sekce skladu -->
-        <section id="inventory-section" class="hidden-section">
-            <h1>Správa skladu</h1>
-            <div class="inventory-tools">
-                <button id="add-product-btn" class="btn btn-primary">Přidat produkt</button>
-                <button id="export-pdf-btn" class="btn btn-secondary">Export do PDF</button>
-                <input type="text" id="inventory-search-input" placeholder="Vyhledat v seznamu...">
-            </div>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Název</th>
-                            <th>Cena</th>
-                            <th>Skladem</th>
-                            <th>Akce</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventory-body"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Modální okno pro produkt -->
-        <div id="product-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <h2 id="modal-title">Přidat produkt</h2>
-                <form id="product-form">
-                    <input type="hidden" id="product-id">
-                    <div class="form-group">
-                        <label for="product-name">Název</label>
-                        <input type="text" id="product-name" required class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-price">Cena (Kč)</label>
-                        <input type="number" id="product-price" required min="0" step="0.01" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="product-stock">Skladem (ks)</label>
-                        <input type="number" id="product-stock" required min="0" class="form-control">
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Uložit</button>
-                        <button type="button" id="cancel-btn" class="btn btn-secondary">Zrušit</button>
-                    </div>
-                </form>
-            </div>
+        <div class="cart">
+          <h2>Nákupní košík</h2>
+          <div id="cart-items"></div>
+          <div class="cart-total">
+            <span>Celkem:</span>
+            <span id="cart-total">0 Kč</span>
+          </div>
+          <button id="checkout-btn" class="btn btn-primary">Dokončit objednávku</button>
         </div>
+      </div>
+    </section>
 
-        <!-- Potvrzovací dialog -->
-        <div id="confirm-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <h2>Potvrdit smazání</h2>
-                <p>Opravdu chcete smazat tento produkt?</p>
-                <div class="modal-actions">
-                    <button id="confirm-delete-btn" class="btn btn-danger">Smazat</button>
-                    <button id="cancel-delete-btn" class="btn btn-secondary">Zrušit</button>
-                </div>
-            </div>
+    <!-- Sekce skladu -->
+    <section id="inventory-section" class="hidden-section">
+      <h1>Správa skladu</h1>
+      
+      <!-- Villa switcher -->
+      <div class="villa-switcher">
+        <label for="villa-select">Vyber vilu:</label>
+        <select id="villa-select">
+          <option value="oh-yeah">Oh Yeah</option>
+          <option value="amazing-pool">Amazing Pool</option>
+          <option value="little-castle">Little Castle</option>
+        </select>
+      </div>
+
+      <div class="inventory-tools">
+        <button id="add-product-btn" class="btn btn-primary">Přidat produkt</button>
+        <button id="export-pdf-btn" class="btn btn-secondary">Export do PDF</button>
+        <input type="text" id="inventory-search-input" placeholder="Vyhledat v seznamu...">
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Název</th>
+              <th>Cena</th>
+              <th>Obrázek</th>
+              <th>Kategorie</th>
+              <th>Akce</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Modální okno pro produkt -->
+    <div id="product-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h2 id="modal-title">Přidat produkt</h2>
+        <form id="product-form">
+          <input type="hidden" id="product-id">
+          <div class="form-group">
+            <label for="product-name">Název</label>
+            <input type="text" id="product-name" required class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="product-price">Cena</label>
+            <input type="number" id="product-price" required min="0" step="0.01" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="product-image">Obrázek (URL)</label>
+            <input type="text" id="product-image" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="product-category">Kategorie</label>
+            <input type="text" id="product-category" class="form-control">
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Uložit</button>
+            <button type="button" id="cancel-btn" class="btn btn-secondary">Zrušit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Potvrzovací dialog -->
+    <div id="confirm-modal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h2>Potvrdit smazání</h2>
+        <p>Opravdu chcete smazat tento produkt?</p>
+        <div class="modal-actions">
+          <button id="confirm-delete-btn" class="btn btn-danger">Smazat</button>
+          <button id="cancel-delete-btn" class="btn btn-secondary">Zrušit</button>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 
-    <!-- Načtení skriptů jako moduly (kvůli import/export) -->
-    <script type="module" src="storage.js"></script>
-    <script type="module" src="validation.js"></script>
-    <script type="module" src="inventory.js"></script>
-    <script type="module" src="pdfExport.js"></script>
-    <script type="module" src="app.js"></script>
+  <!-- Načtení skriptů jako moduly -->
+  <script type="module" src="storage.js"></script>
+  <script type="module" src="validation.js"></script>
+  <script type="module" src="inventory.js"></script>
+  <script type="module" src="pdfExport.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
