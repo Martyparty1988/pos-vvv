@@ -1,127 +1,319 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POS Systém</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa POS | Správa ubytování a prodeje</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <nav class="main-nav">
-    <div class="container">
-      <a href="#" id="pos-link" class="active">Pokladna</a>
-      <a href="#" id="inventory-link">Sklad</a>
-      <a href="#" id="orders-link">Objednávky</a>
-    </div>
-  </nav>
+    <div class="app-container">
+        <!-- Navigační panel -->
+        <nav class="main-nav">
+            <div class="logo">
+                <h1>Villa POS</h1>
+            </div>
+            <div class="location-selector">
+                <button class="location-btn active" data-location="oh-yeah">Oh Yeah</button>
+                <button class="location-btn" data-location="amazing-pool">Amazing Pool</button>
+                <button class="location-btn" data-location="little-castle">Little Castle</button>
+            </div>
+            <div class="nav-controls">
+                <button id="stats-btn" class="nav-btn">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Statistiky</span>
+                </button>
+                <button id="settings-btn" class="nav-btn">
+                    <i class="fas fa-cog"></i>
+                    <span>Nastavení</span>
+                </button>
+                <button id="theme-toggle" class="nav-btn">
+                    <i class="fas fa-moon"></i>
+                    <span>Tmavý režim</span>
+                </button>
+            </div>
+        </nav>
 
-  <main class="container">
-    <!-- Sekce pokladny -->
-    <section id="pos-section" class="active-section">
-      <h1>Pokladna</h1>
-      <div class="grid">
-        <div class="products-list">
-          <div class="search-box">
-            <input type="text" id="product-search" placeholder="Vyhledat produkt...">
-          </div>
-          <div id="products-grid" class="grid"></div>
+        <!-- Hlavní obsah -->
+        <main class="main-content">
+            <!-- Sekce produktů -->
+            <section class="products-section">
+                <div class="search-filter-container">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Hledat produkt...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-container">
+                        <button class="filter-btn active" data-filter="all">Vše</button>
+                        <button class="filter-btn" data-filter="nealko">Nealko</button>
+                        <button class="filter-btn" data-filter="alkohol">Alkohol</button>
+                        <button class="filter-btn" data-filter="pivo">Pivo</button>
+                        <button class="filter-btn" data-filter="relax">Relax</button>
+                    </div>
+                </div>
+                
+                <div class="products-grid" id="products-grid">
+                    <!-- Produkty budou dynamicky generovány JavaScriptem -->
+                </div>
+            </section>
+
+            <!-- Sekce košíku -->
+            <section class="cart-section">
+                <div class="cart-header">
+                    <h2>Košík</h2>
+                    <button id="clear-cart" class="icon-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                
+                <div class="cart-items" id="cart-items">
+                    <!-- Položky košíku budou dynamicky generovány -->
+                    <div class="empty-cart-message">Košík je prázdný</div>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Mezisoučet:</span>
+                        <span id="subtotal">0 Kč</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Celkem:</span>
+                        <span id="total">0 Kč</span>
+                    </div>
+                    
+                    <button id="checkout-btn" class="primary-btn checkout-btn">
+                        <i class="fas fa-receipt"></i>
+                        Vytvořit účtenku
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modální okno pro statistiky -->
+        <div class="modal" id="stats-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Statistiky prodejů</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="stats-container">
+                        <div class="stats-filters">
+                            <button class="stats-filter-btn active" data-period="day">Dnes</button>
+                            <button class="stats-filter-btn" data-period="week">Týden</button>
+                            <button class="stats-filter-btn" data-period="month">Měsíc</button>
+                        </div>
+                        
+                        <div class="stats-cards">
+                            <div class="stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="stats-info">
+                                    <h3>Celkové tržby</h3>
+                                    <p id="total-sales">0 Kč</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="stats-info">
+                                    <h3>Počet prodejů</h3>
+                                    <p id="sales-count">0</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stats-card">
+                                <div class="stats-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stats-info">
+                                    <h3>Nejprodávanější</h3>
+                                    <p id="best-seller">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <canvas id="sales-chart"></canvas>
+                        </div>
+                        
+                        <button id="export-stats" class="primary-btn">
+                            <i class="fas fa-file-export"></i>
+                            Exportovat statistiky
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="cart">
-          <h2>Nákupní košík</h2>
-          <div id="cart-items"></div>
-          <div class="cart-total">
-            <span>Celkem:</span>
-            <span id="cart-total">0 Kč</span>
-          </div>
-          <button id="checkout-btn" class="btn btn-primary">Dokončit objednávku</button>
+
+        <!-- Modální okno pro nastavení -->
+        <div class="modal" id="settings-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Nastavení</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-container">
+                        <div class="settings-group">
+                            <h3>Obecné nastavení</h3>
+                            
+                            <div class="setting-item">
+                                <label for="default-location">Výchozí lokace:</label>
+                                <select id="default-location">
+                                    <option value="oh-yeah">Oh Yeah</option>
+                                    <option value="amazing-pool">Amazing Pool</option>
+                                    <option value="little-castle">Little Castle</option>
+                                </select>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label for="currency-display">Zobrazení měny:</label>
+                                <select id="currency-display">
+                                    <option value="before">Před cenou (€ 99)</option>
+                                    <option value="after" selected>Za cenou (99 Kč)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="setting-item toggle">
+                                <label for="animations-toggle">Animace:</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="animations-toggle" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-group">
+                            <h3>Správa dat</h3>
+                            
+                            <button id="clear-data" class="danger-btn">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Vymazat všechna data
+                            </button>
+                            
+                            <button id="export-data" class="secondary-btn">
+                                <i class="fas fa-download"></i>
+                                Exportovat data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Sekce skladu -->
-    <section id="inventory-section" class="hidden-section">
-      <h1>Správa skladu</h1>
-      
-      <!-- Villa switcher -->
-      <div class="villa-switcher">
-        <label for="villa-select">Vyber vilu:</label>
-        <select id="villa-select">
-          <option value="oh-yeah">Oh Yeah</option>
-          <option value="amazing-pool">Amazing Pool</option>
-          <option value="little-castle">Little Castle</option>
-        </select>
-      </div>
+        <!-- Modální okno pro účtenku -->
+        <div class="modal" id="receipt-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Účtenka</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="receipt-container" id="receipt-container">
+                        <!-- Obsah účtenky bude generován dynamicky -->
+                    </div>
+                    
+                    <div class="receipt-actions">
+                        <button id="print-receipt" class="secondary-btn">
+                            <i class="fas fa-print"></i>
+                            Tisk
+                        </button>
+                        <button id="save-receipt" class="primary-btn">
+                            <i class="fas fa-save"></i>
+                            Uložit
+                        </button>
+                        <button id="complete-sale" class="success-btn">
+                            <i class="fas fa-check"></i>
+                            Dokončit prodej
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <div class="inventory-tools">
-        <button id="add-product-btn" class="btn btn-primary">Přidat produkt</button>
-        <button id="export-pdf-btn" class="btn btn-secondary">Export do PDF</button>
-        <input type="text" id="inventory-search-input" placeholder="Vyhledat v seznamu...">
-      </div>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Název</th>
-              <th>Cena</th>
-              <th>Obrázek</th>
-              <th>Kategorie</th>
-              <th>Akce</th>
-            </tr>
-          </thead>
-          <tbody id="inventory-body"></tbody>
-        </table>
-      </div>
-    </section>
+        <!-- Modální okno pro vlastní cenu -->
+        <div class="modal" id="custom-price-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Nastavit cenu</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="custom-price-container">
+                        <h3 id="custom-price-product-name">Wellness balíček</h3>
+                        
+                        <div class="input-group">
+                            <label for="custom-price-input">Cena (€):</label>
+                            <input type="number" id="custom-price-input" min="0" step="0.01">
+                        </div>
+                        
+                        <button id="apply-custom-price" class="primary-btn">
+                            <i class="fas fa-check"></i>
+                            Použít
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- Modální okno pro produkt -->
-    <div id="product-modal" class="modal" style="display: none;">
-      <div class="modal-content">
-        <h2 id="modal-title">Přidat produkt</h2>
-        <form id="product-form">
-          <input type="hidden" id="product-id">
-          <div class="form-group">
-            <label for="product-name">Název</label>
-            <input type="text" id="product-name" required class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="product-price">Cena</label>
-            <input type="number" id="product-price" required min="0" step="0.01" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="product-image">Obrázek (URL)</label>
-            <input type="text" id="product-image" class="form-control">
-          </div>
-          <div class="form-group">
-            <label for="product-category">Kategorie</label>
-            <input type="text" id="product-category" class="form-control">
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Uložit</button>
-            <button type="button" id="cancel-btn" class="btn btn-secondary">Zrušit</button>
-          </div>
-        </form>
-      </div>
+        <!-- Modální okno pro City Tax -->
+        <div class="modal" id="city-tax-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>City Tax</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="city-tax-container">
+                        <p>City Tax = počet osob × počet nocí × 2 €</p>
+                        
+                        <div class="input-group">
+                            <label for="persons-count">Počet osob:</label>
+                            <input type="number" id="persons-count" min="1" value="1">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="nights-count">Počet nocí:</label>
+                            <input type="number" id="nights-count" min="1" value="1">
+                        </div>
+                        
+                        <div class="city-tax-result">
+                            <span>Celkem:</span>
+                            <span id="city-tax-total">2 €</span>
+                        </div>
+                        
+                        <button id="apply-city-tax" class="primary-btn">
+                            <i class="fas fa-check"></i>
+                            Použít
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Potvrzovací dialog --> 
-    <div id="confirm-modal" class="modal" style="display: none;">
-      <div class="modal-content">
-        <h2>Potvrdit smazání</h2>
-        <p>Opravdu chcete smazat tento produkt?</p>
-        <div class="modal-actions">
-          <button id="confirm-delete-btn" class="btn btn-danger">Smazat</button>
-          <button id="cancel-delete-btn" class="btn btn-secondary">Zrušit</button>
-        </div>
-      </div>
+    <!-- Notifikace -->
+    <div class="notification" id="notification">
+        <i class="notification-icon"></i>
+        <p class="notification-message"></p>
     </div>
-  </main>
 
-  <!-- Načtení skriptů jako moduly -->
-  <script type="module" src="storage.js"></script>
-  <script type="module" src="validation.js"></script>
-  <script type="module" src="inventory.js"></script>
-  <script type="module" src="pdfExport.js"></script>
-  <script type="module" src="app.js"></script>
+    <!-- Chart.js knihovna pro grafy -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- JavaScript soubory -->
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/statistics.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
