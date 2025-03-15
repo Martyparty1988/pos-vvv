@@ -208,3 +208,129 @@ const DEFAULT_PRODUCTS = [
     {
         id: 'fanta',
         name: 'Fanta',
+        price: 32,
+        currency: 'CZK',
+        category: 'nealko',
+        image: 'images/fanta.png'
+    },
+    {
+        id: 'sprite',
+        name: 'Sprite',
+        price: 32,
+        currency: 'CZK',
+        category: 'nealko',
+        image: 'images/sprite.png'
+    },
+    {
+        id: 'red-bull',
+        name: 'Red Bull',
+        price: 59,
+        currency: 'CZK',
+        category: 'nealko',
+        image: 'images/red-bull.png'
+    },
+    
+    // Alkoholické nápoje
+    {
+        id: 'malibu',
+        name: 'Malibu',
+        price: 99,
+        currency: 'CZK',
+        category: 'alkohol',
+        image: 'images/malibu.png'
+    },
+    {
+        id: 'jack-cola',
+        name: 'Jack s colou',
+        price: 99,
+        currency: 'CZK',
+        category: 'alkohol',
+        image: 'images/jack-cola.png'
+    },
+    {
+        id: 'moscow-mule',
+        name: 'Moscow Mule',
+        price: 99,
+        currency: 'CZK',
+        category: 'alkohol',
+        image: 'images/moscow-mule.png'
+    },
+    {
+        id: 'gin-tonic',
+        name: 'Gin-Tonic',
+        price: 99,
+        currency: 'CZK',
+        category: 'alkohol',
+        image: 'images/gin-tonic.png'
+    },
+    {
+        id: 'mojito',
+        name: 'Mojito',
+        price: 99,
+        currency: 'CZK',
+        category: 'alkohol',
+        image: 'images/mojito.png'
+    },
+    {
+        id: 'prosecco',
+        name: 'Prosecco',
+        price: 390,
+        currency: 'CZK',
+        category: 'alkohol',
+        image: 'images/prosecco.png'
+    },
+    
+    // Piva
+    {
+        id: 'budvar',
+        name: 'Budvar',
+        price: 59,
+        currency: 'CZK',
+        category: 'pivo',
+        image: 'images/budvar.png'
+    },
+    {
+        id: 'sud-30l',
+        name: 'Sud 30l',
+        price: 125,
+        currency: 'EUR',
+        category: 'pivo',
+        image: 'images/sud-30l.png'
+    },
+    {
+        id: 'sud-50l',
+        name: 'Sud 50l',
+        price: 175,
+        currency: 'EUR',
+        category: 'pivo',
+        image: 'images/sud-50l.png'
+    },
+    
+    // Relaxační služby
+    {
+        id: 'wellness',
+        name: 'Wellness balíček',
+        price: 0,
+        currency: 'EUR',
+        category: 'relax',
+        image: 'images/wellness.png',
+        customPrice: true
+    },
+    {
+        id: 'plyny',
+        name: 'Plyny do ohňových stolů',
+        price: 12,
+        currency: 'EUR',
+        category: 'relax',
+        image: 'images/plyny.png'
+    },
+    {
+        id: 'city-tax',
+        name: 'City Tax',
+        price: 0,
+        currency: 'EUR',
+        category: 'relax',
+        image: 'images/city-tax.png',
+        cityTax: true
+    }
+];
