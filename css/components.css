@@ -1,0 +1,518 @@
+/* Styly pro komponenty Villa POS systému */
+
+/* ---------- Produktové karty ---------- */
+.product-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 220px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-card.nealko {
+    border-top: 3px solid #3498db;
+}
+
+.product-card.alkohol {
+    border-top: 3px solid #e74c3c;
+}
+
+.product-card.pivo {
+    border-top: 3px solid #f39c12;
+}
+
+.product-card.relax {
+    border-top: 3px solid #2ecc71;
+}
+
+.product-image {
+    height: 130px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0.5rem;
+}
+
+.product-category {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+}
+
+.product-info {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    font-size: var(--font-size-md);
+}
+
+.product-price {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price-eur {
+    color: var(--secondary-color);
+}
+
+.add-to-cart {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.add-to-cart:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.1);
+}
+
+/* ---------- Položky košíku ---------- */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    transition: background-color var(--transition-speed);
+}
+
+.cart-item:hover {
+    background-color: #f8f8f8;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-image {
+    width: 45px;
+    height: 45px;
+    border-radius: var(--border-radius);
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: var(--font-size-md);
+    margin-bottom: 0.25rem;
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+}
+
+.cart-item-price-eur {
+    color: var(--secondary-color);
+}
+
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border-light);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.quantity-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.quantity-value {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+.remove-item {
+    color: var(--danger-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: var(--font-size-sm);
+    transition: transform var(--transition-speed);
+}
+
+.remove-item:hover {
+    transform: scale(1.1);
+}
+
+/* ---------- Statistiky ---------- */
+.stats-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.stats-filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-light);
+    background-color: #f8f8f8;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.stats-filter-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.stats-filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stats-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.stats-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stats-info h3 {
+    font-size: var(--font-size-md);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.stats-info p {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+.chart-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    height: 300px;
+}
+
+/* ---------- Nastavení ---------- */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.settings-group h3 {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.setting-item label {
+    font-weight: 500;
+}
+
+.setting-item select, 
+.setting-item input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    width: 50%;
+}
+
+.setting-item.toggle {
+    justify-content: space-between;
+}
+
+/* ---------- Účtenka ---------- */
+.receipt-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1.5rem;
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.receipt-header h2 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0.5rem;
+}
+
+.receipt-header p {
+    color: #777;
+    font-size: var(--font-size-sm);
+}
+
+.receipt-items {
+    margin-bottom: 1.5rem;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--border-light);
+}
+
+.receipt-item:last-child {
+    border-bottom: none;
+}
+
+.receipt-item-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.receipt-item-name {
+    font-weight: 500;
+}
+
+.receipt-item-quantity {
+    font-size: var(--font-size-sm);
+    color: #777;
+}
+
+.receipt-summary {
+    border-top: 2px solid var(--border-light);
+    padding-top: 1rem;
+}
+
+.receipt-summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.receipt-summary-row.total {
+    font-weight: bold;
+    font-size: var(--font-size-lg);
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed var(--border-light);
+}
+
+.receipt-footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: var(--font-size-sm);
+    color: #777;
+}
+
+.receipt-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* ---------- City Tax a Custom Price modály ---------- */
+.city-tax-container,
+.custom-price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.city-tax-container p {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-weight: 500;
+}
+
+.input-group input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-md);
+}
+
+.city-tax-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f8f8f8;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+#city-tax-total {
+    color: var(--secondary-color);
+    font-size: var(--font-size-lg);
+}
+
+#custom-price-product-name {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* Tmavý režim pro komponenty */
+.dark-theme .product-card {
+    background-color: #2c3e50;
+    color: var(--text-light);
+}
+
+.dark-theme .cart-item {
+    border-color: #34495e;
+}
+
+.dark-theme .cart-item:hover {
+    background-color: #2c3e50;
+}
+
+.dark-theme .quantity-btn {
+    background-color: #2c3e50;
+    border-color: #34495e;
+}
+
+.dark-theme .quantity-btn:hover {
+    background-color: #34495e;
+}
+
+.dark-theme .stats-card,
+.dark-theme .chart-container,
+.dark-theme .receipt-container {
+    background-color: #2c3e50;
+    color: var(--text-light);
+}
+
+.dark-theme .setting-item select,
+.dark-theme .setting-item input,
+.dark-theme .input-group input {
+    background-color: #2c3e50;
+    border-color: #34495e;
+    color: var(--text-light);
+}
+
+.dark-theme .stats-filter-btn {
+    background-color: #2c3e50;
+    border-color: #34495e;
+    color: var(--text-light);
+}
+
+.dark-theme .stats-filter-btn:hover {
+    background-color: #34495e;
+}
+
+.dark-theme .receipt-item {
+    border-color: #34495e;
+}
+
+.dark-theme .city-tax-result {
+    background-color: #2c3e50;
+    color: var(--text-light);
+}
+
+/* Drag & Drop styl */
+.product-card.dragging {
+    opacity: 0.6;
+    cursor: grabbing;
+}
+
+.cart-section.drag-over {
+    background-color: rgba(46, 204, 113, 0.1);
+    box-shadow: 0 0 0 2px var(--success-color);
+}
