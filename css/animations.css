@@ -1,0 +1,316 @@
+/* Animace pro Villa POS systém */
+
+/* Základní přechody aplikované na všechny elementy */
+* {
+    transition-property: background-color, border-color, color, opacity, transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+/* ---------- Animace produktů ---------- */
+
+/* Animace při načtení produktů */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-card {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Animace pro jednotlivé produkty s postupným zpožděním */
+.products-grid .product-card:nth-child(1) { animation-delay: 0.05s; }
+.products-grid .product-card:nth-child(2) { animation-delay: 0.1s; }
+.products-grid .product-card:nth-child(3) { animation-delay: 0.15s; }
+.products-grid .product-card:nth-child(4) { animation-delay: 0.2s; }
+.products-grid .product-card:nth-child(5) { animation-delay: 0.25s; }
+.products-grid .product-card:nth-child(6) { animation-delay: 0.3s; }
+.products-grid .product-card:nth-child(7) { animation-delay: 0.35s; }
+.products-grid .product-card:nth-child(8) { animation-delay: 0.4s; }
+.products-grid .product-card:nth-child(9) { animation-delay: 0.45s; }
+.products-grid .product-card:nth-child(10) { animation-delay: 0.5s; }
+
+/* 3D efekt pro produkty */
+.product-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.product-card:hover .product-image {
+    transform: translateZ(10px);
+}
+
+.product-card:hover .product-info {
+    transform: translateZ(5px);
+}
+
+/* ---------- Animace košíku ---------- */
+
+/* Animace přidání do košíku */
+@keyframes addToCart {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.cart-item.new {
+    animation: addToCart 0.4s ease;
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+/* Animace odebrání z košíku */
+@keyframes removeFromCart {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+}
+
+.cart-item.removing {
+    animation: removeFromCart 0.3s ease forwards;
+}
+
+/* Animace změny množství */
+@keyframes quantityChanged {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.quantity-value.changed {
+    animation: quantityChanged 0.3s ease;
+    color: var(--primary-color);
+}
+
+/* ---------- Animace pro modální okna ---------- */
+
+/* Animace otevření modálního okna */
+@keyframes modalOpen {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal.active .modal-content {
+    animation: modalOpen 0.3s ease forwards;
+}
+
+/* Animace zavření modálního okna */
+@keyframes modalClose {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.modal.closing .modal-content {
+    animation: modalClose 0.3s ease forwards;
+}
+
+/* ---------- Animace notifikací ---------- */
+
+/* Animace pro notifikace */
+@keyframes notificationSlideIn {
+    from {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes notificationSlideOut {
+    from {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50%) translateY(100%);
+        opacity: 0;
+    }
+}
+
+.notification.active {
+    animation: notificationSlideIn 0.4s ease forwards;
+}
+
+.notification.closing {
+    animation: notificationSlideOut 0.4s ease forwards;
+}
+
+/* ---------- Animace filtrování ---------- */
+
+/* Animace filtrování produktů */
+@keyframes filterProducts {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.products-grid.filtering .product-card {
+    animation: filterProducts 0.4s ease forwards;
+}
+
+/* ---------- Micro-interakce ---------- */
+
+/* Vlnkový efekt pro tlačítka */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    animation: ripple 0.6s linear;
+}
+
+/* Rotace ikony pro tlačítko pro vymazání košíku */
+#clear-cart:hover i {
+    animation: rotate 0.5s ease;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+/* Pulzování tlačítka pro placení */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+}
+
+.checkout-btn:not(:active):hover {
+    animation: pulse 1.5s infinite;
+}
+
+/* Animace přepínání témat */
+.app-container {
+    transition: background-color 0.6s ease;
+}
+
+body.theme-transition * {
+    transition-duration: 0.6s;
+}
+
+#theme-toggle i {
+    transition: transform 0.4s ease;
+}
+
+#theme-toggle:hover i {
+    transform: rotate(30deg);
+}
+
+.dark-theme #theme-toggle i {
+    transform: rotate(180deg);
+}
+
+/* Animace pro kategorie produktů */
+.filter-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.filter-btn:hover::after {
+    width: 100%;
+}
+
+.filter-btn.active::after {
+    width: 100%;
+}
+
+/* Animace statistik */
+.stats-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stats-icon {
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover .stats-icon {
+    transform: scale(1.2);
+}
+
+/* Zakázání animací pokud uživatel preferuje žádné animace */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001s !important;
+        transition-duration: 0.001s !important;
+    }
+}
