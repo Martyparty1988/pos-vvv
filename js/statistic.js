@@ -1,8 +1,3 @@
-/**
- * statistics.js
- * Modul pro správu statistik
- */
-
 const Statistics = {
     // Reference na Chart.js objekty
     charts: {
