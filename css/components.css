@@ -1,6 +1,3 @@
-/* Styly pro komponenty Villa POS systému */
-
-/* ---------- Produktové karty ---------- */
 .product-card {
     background-color: white;
     border-radius: var(--border-radius);
