@@ -1,9 +1,3 @@
-/**
- * storage.js
- * Modul pro správu dat v localStorage
- */
-
-// Inicializace localStorage klíčů
 const STORAGE_KEYS = {
     PRODUCTS: 'villa_pos_products',
     CART: 'villa_pos_cart',
