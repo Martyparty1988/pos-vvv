@@ -1,7 +1,5 @@
-/* Animace pro Villa POS systém */
 
-/* Základní přechody aplikované na všechny elementy */
-* {
+{
     transition-property: background-color, border-color, color, opacity, transform;
     transition-duration: 0.3s;
     transition-timing-function: ease;
