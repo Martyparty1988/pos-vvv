@@ -1,8 +1,3 @@
-/**
- * inventory.js
- * Modul pro správu inventáře
- */
-
 const Inventory = {
     /**
      * Inicializuje správu inventáře
