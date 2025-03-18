@@ -1,5 +1,4 @@
-
-{
+*{
     transition-property: background-color, border-color, color, opacity, transform;
     transition-duration: 0.3s;
     transition-timing-function: ease;
